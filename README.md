@@ -64,5 +64,6 @@ Compute Canada (https://www.computecanada.ca/research-portal/): Canadian computa
 ## Statistics:<br>
 Resource for ANOVA: https://statsandr.com/blog/anova-in-r/ <br>
 Resources for plotting and assumption testing: https://remi-theriault.com/tutorials/ <br>
-
+Textbook resource for fundamentals of statistics and R: https://learningstatisticswithr.com/book/index.html
+Bayesian statistics resource: https://statswithr.github.io/book/index.html
 
