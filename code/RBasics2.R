@@ -13,7 +13,9 @@ mental_health_survey <- read_csv(file = "MentalHealthTech_Kaggle/survey.csv")
 #without piping
 glimpse(mental_health_survey)
 
-#with piping
+#with piping 
+#Note: imagine piping as as alternative way of using a function in R. Instead of writing `glimpse(mental_health_survey)`, we can instead obtain the same result by using a diferrent syntax using a pipe (%>%)!
+#Pipes are useful because they essentially take an initial object and serially transform it (via the application of functions) to provide us with our desired output, all the while making our to make our lives easier by having more efficient, user-friendly, and cleaner code. Please see below!
 mental_health_survey %>% glimpse()
 
 #look at a few entries
@@ -26,7 +28,7 @@ mental_health_survey %>% group_by(Country) %>% summarise(country_count = n())
 mental_health_survey %>% summarise_if(is.numeric, range)
 
 #Combining filtering with conditionals
-#Filter by age
+#Filter by age (recall that "filter" is a super cool function from the tidyverse that helps us easily select rows of interest)
 mental_health_survey %>% filter(Age >= 18 & Age <= 100) -> mental_health_survey
 
 #How many respondents are over 30?
