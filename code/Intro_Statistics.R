@@ -1,19 +1,20 @@
 #######################################################################################
 #
 #
-#                                 Class XXX Statistics intro
+#                                 Class XXX Statistics Intro
 #                             
 #
 #
 #######################################################################################
 ######
-# See slides on GitHub for theory
+# See slides on GitHub for theory information
 #####
 ########## Descriptive stats
 library(dplyr)
 head(iris)
 data=iris
 data[55,4]=NaN
+
 ## mean
 mean(iris$Sepal.Length) # take mean of the entire column
 mean(data$Sepal.Length) # take mean of the entire column
@@ -22,8 +23,9 @@ colMeans(iris[,1:4]) # take mean of every coloumn
 rowMeans(iris[,1:4]) # take mean of every row Note that these functions require NUMERIC data
 
 ## Median
-# Note that median DOES NOT have a function for rows and cols
+# Note that median DOES NOT have a function for rows and cols!!!
 median(iris$Sepal.Length)
+
 # what if we used apply to help us with this?
 lapply(data[1:4], median, na.rm = TRUE)
 apply(data[1:4], 1, median, na.rm = TRUE)
@@ -40,7 +42,6 @@ summary_stats=iris %>% group_by(Species) %>% summarise(mean_length=mean(Sepal.Le
 ########## Exercise 1
 ##########################################
 # R does not have an inbuilt Mode function, try building one yourself (note: DescTools pacakge has a function Mode)
-
 
 
 ## Max, Min, Min k
@@ -83,7 +84,7 @@ apply(data[1:4], 2, IQR,na.rm = TRUE)
 # compute 95% confidence intervals of a normal distribution
 # this is the equivalent of the following formula: 
 #               
-#                 CI = mean(x) =/- z* (s/sqrt(n))
+#                 CI = mean(x) +/- z*(s/sqrt(n))
 #
 # where z is the value of the cumulative normal dist of the confidence level 
 # s is the standard deviation and n is the sample size
@@ -121,7 +122,7 @@ cor.test(iris$Sepal.Length,iris$Petal.Length, method = "spearman")
 
 
 ########## Inferential stats
-## T-tests in R 
+## t-tests in R 
 # All the different kinds of t-test you would like to run can be done with the t.test() function using different inputs 
 # let us compare the loudness of music on spotify between groups of explicit vs non-explicity 
 
@@ -139,21 +140,21 @@ t.test(iris$Sepal.Length,var.equal = TRUE, alternative = "less")
 t.test(iris$Sepal.Length,var.equal = TRUE, alternative = "less", mu = 7)
 
 
-# two sample tests:
+# Two-sample t-tests:
 hot100=read.csv('/Users/jasondsc/Documents/GitHub/Sta-R-tistics/data/Hot_100_Audio_Features.csv') # read data
-hot100=hot100[!is.na(hot100$spotify_track_explicit),] # remove nas
-hot100=hot100[!is.na(hot100$loudness),] # remove nas
+hot100=hot100[!is.na(hot100$spotify_track_explicit),] # remove NAs
+hot100=hot100[!is.na(hot100$loudness),] # remove NAs
 
 sample1=hot100$loudness[hot100$spotify_track_explicit==FALSE] # collect sample 1 (non-explicit)
 sample2=hot100$loudness[hot100$spotify_track_explicit==TRUE] # collect sample 2 (explicit)
 
-# simple two sample t-test (two-sided) assuming equal variance 
+# simple two-sample t-test (two-sided) assuming equal variance 
 t.test(sample1,sample2, var.equal = TRUE)
-# simple two sample t-test (two-sided) un-equal variance 
+# simple two-sample t-test (two-sided) un-equal variance 
 t.test(sample1,sample2)
-# simple two sample t-test (two-sided) assuming equal variance, testing that sample 1 is LOWER than sample 2
+# simple two-sample t-test (two-sided) assuming equal variance, testing that sample 1 is LOWER than sample 2
 t.test(sample1,sample2, var.equal = TRUE, alternative = "less")
-# simple two sample t-test (two-sided) assuming equal variance, testing that sample 1 is GREATER than sample 2
+# simple two-sample t-test (two-sided) assuming equal variance, testing that sample 1 is GREATER than sample 2
 t.test(sample1,sample2, var.equal = TRUE, alternative = "greater")
 
 ########## Exercise 5
@@ -183,7 +184,7 @@ t.test(sample1-sample2, var.equal = TRUE)
 
 
 
-## assumptions of a t-test
+## Assumptions of a t-test
 ########
 # 1. Independence 
 # we first assume that the data are independent of one another... this complicated (will discuss in course)
@@ -201,7 +202,7 @@ shapiro.test(iris$Sepal.Length)
 shapiro.test(hot100$loudness[hot100$spotify_track_explicit==FALSE]) # is sample size a problem? Why?
 
 # Q-Q plot
-# here we plot our datas quantiles against a theortical normal dist quantiles
+# here, we plot our datas quantiles against a theortical normal dist quantiles
 # we should hopefully see that our data lines up nicely with the theoretical one
 # along the x-y diagonal line. Any deviation from this line would indicate some 
 # non-normal property of the distribution
@@ -265,7 +266,6 @@ ggplot(data=one_group, aes(x=V3, y=V1, colour=V2, group=V2)) + xlim(c(0,100)) +
   geom_line(size=1.3) + scale_fill_brewer(palette="Pastel1") + theme_minimal() + labs(y= "Power (%)", x ="Sample size (N)", color= "Effect Size")  +
   coord_cartesian(ylim=c(0, 1)) + theme(legend.justification=c(1,1), legend.position=c(1,1)) + geom_hline(yintercept = 0.80, linetype="dashed", color = "black", size=1)
                                                                                                           
-
 
 # I have provided a list of samples I have extracted from 38 random EEG papers sampled from the literature
 # Let us use these sample sizes and different effect sizes to compute how much statitical power the field
@@ -622,11 +622,12 @@ mean(temp$m)
 # look at slopes from table above (diff from explicit to non-explicit)
 
 
-## assumptions of a Regression
+## assumptions of a Linear Regression
 ########
 sample1=hot100_4anova[sample(10000,length(hot100_4anova)),]
 lm0=lm(danceability ~  key, sample1)
 summary(lm0)
+
 # 1. Linearity of relationship
 ## this can be checked with a residual vs fitted plot. The data should show no relationship 
 plot(lm0,1)
