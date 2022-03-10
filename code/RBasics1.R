@@ -12,7 +12,7 @@ sex <- "Female"
 sex          # typing the name of the object
 class(sex)   # type of the object
 
-#boolean
+#boolean (aka "factor" variable)
 result <- (weight > 50)
 result
 
