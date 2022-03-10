@@ -1,13 +1,13 @@
 ###Slide 8--------------------------------------------------
 ##variable and data types
-#numeric
+#numeric variable
 weight <- 60.5    # doesn't print anything but assinging number to variable
 weight          # typing the name of the object
 class(weight)   # type of the object
 #numeric and numeric type
 typeof(weight)
 
-#character
+#character variable
 sex <- "Female"
 sex          # typing the name of the object
 class(sex)   # type of the object
@@ -18,7 +18,7 @@ result
 
 ###Slide 9--------------------------------------------------
 ##converting type of variables
-#character to numbers
+#character to number variable
 new_number <- "30"
 class(new_number)
 new_number <- as.numeric(new_number)
@@ -31,27 +31,27 @@ new_number
 
 #this will not work properly
 class(sex)
-sex <- as.numeric(sex)
+sex <- as.numeric(sex) #This will not work because "sex" does not contain any numerical values, only strings/characters (aka letters!)  
 
-#double to integer
+#double to integer (think of this as converting from one type of numeric to another, which allows for the presence of decimal values!)
 weight <- as.integer(weight)
 weight
 
-#boolean to numeric
+#boolean to numeric 
 as.numeric(result)
 
 ###Slide 11--------------------------------------------------
-#vector with numeric variables
+#Create a vector (fundamental R object) with numeric variables
 age <- c(21, 34, 39, 54, 55)
 class(age)
 length(age)
-#matric with numeric variables
+#Create a matrix with numeric variables
 new_matrix <- matrix(1:9, nrow = 3, ncol = 3)
 new_matrix
 class(new_matrix)
 
 ###Slide 12--------------------------------------------------
-#list containing, strings, numbers, logical 
+#Create a list containing, strings, numbers, logical 
 subject_a <- list("Female", c(21, 33), weight = 60, TRUE)
 subject_a
 class(subject_a)
@@ -59,7 +59,7 @@ length(subject_a)
 subject_a[["weight"]]
 subject_a[[2]]
 
-#dataframe containing strings and numbers
+#Create a dataframe containing strings and numbers
 age <- c(21, 34, 39, 54, 55) 
 group <- c("MDD", "Ctrl", "MDD", "Ctrl", "Ctrl")
 meta.data <- data.frame(age, group) #create dataframe
@@ -95,8 +95,8 @@ head(data2)
 
 ###Slide 17--------------------------------------------------
 #Expore data
-head(my.data1) #check first few rows of data
-dim(my.data1) #check number of rows and columns
+head(my.data1) #This lets us check the first few rows of data
+dim(my.data1) #This lets us check the number of rows and columns
 colnames(my.data1) #list column names
 rownames(my.data1) #list row names
 
@@ -110,10 +110,12 @@ table(my.data1$Country)
 
 #check for NA in a list
 weights <- c(63, 69, 60, 65, NA, 68, 61, 59, 64, 69, 63, 63, NA)
-sum(is.na(weights))
+sum(is.na(weights)) #this provides the sum without the NA variable
+
 #example1
 is.na(weights)
 weights[!is.na(weights)]
+
 #example2
 mean(weights)
 mean(weights, na.rm = TRUE)
@@ -134,23 +136,24 @@ install.packages("tidyverse") #install a library package
 library(ggplot2) #callinga a library
 ggplot2::geom_boxplot#check ggplot function 
 ggplot2::geom_boxplot()
-?geom_boxplot
+?geom_boxplot #Provides information about the geom_boxplot function in ggplot2 
 
 ###Slide 19--------------------------------------------------
-##explore two lists
+##Let's explore two lists
 x <- c(1,3,5,8,13,42,67,88,93) #create list x
 y <- c(5,4,21,8,78,65,42) #create list y
 union(x,y) #check union of list x and list y
 intersect(x,y) #check overlap of list x and list y
 setdiff(x,y) #number in list x but not in list y
-setdiff(y,x)
+setdiff(y,x) #Notice something different?
 
 #Exercise5 using country_mydata1 and country_mydata2 
 country_mydata1 <- unique(my.data1$Country)
 country_mydata2 <- c("Bulgaria", "Switzerland", "Italy", "France", "Finland", "India", "Vietnam", "Indonesia", "Malaysia","China")
-#Which county is included in both lists?
-#Which county is unique to country_mydata2
-#Which county is unique to country_mydata1
+
+#Which county is included in both lists? 
+#Which county is unique to country_mydata2?
+#Which county is unique to country_mydata1?
 
 ###Slide 20--------------------------------------------------
 #arithmetic operator
