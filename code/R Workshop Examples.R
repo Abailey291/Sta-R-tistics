@@ -22,7 +22,6 @@ pbinom(q = 3, size = 8, prob = 1/2)
 sum(dbinom(x = 0:3 , size = 8, prob = 1/2))
 
 rbinom(n = 1, size = 8, prob = 1/2)
-
 ```
 
 #ANOVA (Analysis of Variance)
